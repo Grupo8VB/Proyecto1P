@@ -15,7 +15,7 @@ Module Module1
 
         Console.Title = "SISTEMA DE FACTURACION "
         Console.ForegroundColor = ConsoleColor.Yellow
-        xmlDoc.Load(path + "sistemaPlatillos.xml")
+        xmlDoc.Load(path + "sistemaFacturacion.xml")
 
         cargarUsuarios()
         iniciarSesion()
@@ -176,22 +176,42 @@ Module Module1
                                 number1 = Byte.Parse(opcion)
                                 Select Case number1
                                     Case 1
+                                        Try
+                                            'agregarCategoria()
+                                            Console.WriteLine("LA CATEGORIA SE INGRESO CORRECTAMENTE")
+                                            Console.ReadLine()
+                                            menuAdministradores()
+                                        Catch ex As Exception
+                                            Console.WriteLine("LA CATEGORIA NO SE INGRESO CORRECTAMENTE")
+                                            Console.ReadLine()
+                                            menuAdministradores()
+                                        End Try
 
                                     Case 2
+                                        Try
+                                            'modificarCategoria()
+                                            Console.WriteLine("LA CATEGORIA SE MODIFICÓ CORRECTAMENTE")
+                                            Console.ReadLine()
+                                            menuAdministradores()
+                                        Catch ex As Exception
+                                            Console.WriteLine("LA CATEGORIA NO SE MODIFICÓ CORRECTAMENTE")
+                                            Console.ReadLine()
+                                            menuAdministradores()
+                                        End Try
 
                                     Case 3
-                                        Console.WriteLine("Saliendo del Sistema!!!....")
+                                        Console.WriteLine("Saliendo del Sistema....")
                                         Exit Do
                                 End Select
                                 Exit Do
                             Catch ex1 As FormatException
                                 Console.WriteLine(vbNewLine)
                                 Console.WriteLine("------------Error de formato------------")
-                                'menuEmpleadores()
+
                             Catch ex2 As OverflowException
                                 Console.WriteLine(vbNewLine)
                                 Console.WriteLine("-----------Error rango de datos------------")
-                                'menuEmpleadores()
+
                             Catch ex As Exception
                                 Console.WriteLine(vbNewLine)
                                 Console.WriteLine("------------Error general--------------")
@@ -218,22 +238,42 @@ Module Module1
                                 number2 = Byte.Parse(opcion)
                                 Select Case number2
                                     Case 1
+                                        Try
+                                            'agregarProducto()
+                                            Console.WriteLine("EL PRODUCTO SE INGRESO CORRECTAMENTE")
+                                            Console.ReadLine()
+                                            menuAdministradores()
+                                        Catch ex As Exception
+                                            Console.WriteLine("EL PRODUCTO NO SE INGRESO CORRECTAMENTE")
+                                            Console.ReadLine()
+                                            menuAdministradores()
+                                        End Try
 
                                     Case 2
+                                        Try
+                                            'modificarProducto()
+                                            Console.WriteLine("EL PRODUCTO SE MODIFICÓ CORRECTAMENTE")
+                                            Console.ReadLine()
+                                            menuAdministradores()
+                                        Catch ex As Exception
+                                            Console.WriteLine("EL PRODUCTO NO SE MODIFICÓ CORRECTAMENTE")
+                                            Console.ReadLine()
+                                            menuAdministradores()
+                                        End Try
 
                                     Case 3
-                                        Console.WriteLine("Saliendo del Sistema!!!....")
+                                        Console.WriteLine("Saliendo del Sistema....")
                                         Exit Do
                                 End Select
                                 Exit Do
                             Catch ex1 As FormatException
                                 Console.WriteLine(vbNewLine)
                                 Console.WriteLine("------------Error de formato------------")
-                                'menuEmpleadores()
+
                             Catch ex2 As OverflowException
                                 Console.WriteLine(vbNewLine)
                                 Console.WriteLine("-----------Error rango de datos------------")
-                                'menuEmpleadores()
+
                             Catch ex As Exception
                                 Console.WriteLine(vbNewLine)
                                 Console.WriteLine("------------Error general--------------")
@@ -252,6 +292,7 @@ Module Module1
                             Console.WriteLine("1. MODIFICAR IMPUESTO")
                             Console.WriteLine("2. IVA POR TIPO DE PAGO")
                             Console.WriteLine("3. IVA POR PROVINCIA")
+                            Console.WriteLine("4. SALIR DEL SISTEMA")
                             Console.WriteLine("")
                             Console.Write(vbCrLf & "DIGITE OPCION DEL MENU:" & vbTab)
 
@@ -264,38 +305,40 @@ Module Module1
                                     Case 2
 
                                     Case 3
-                                        Console.WriteLine("Saliendo del Sistema!!!....")
+
+                                    Case 4
+                                        Console.WriteLine("Saliendo del Sistema....")
                                         Exit Do
                                 End Select
                                 Exit Do
                             Catch ex1 As FormatException
                                 Console.WriteLine(vbNewLine)
                                 Console.WriteLine("------------Error de formato------------")
-                                'menuEmpleadores()
+
                             Catch ex2 As OverflowException
                                 Console.WriteLine(vbNewLine)
                                 Console.WriteLine("-----------Error rango de datos------------")
-                                'menuEmpleadores()
+
                             Catch ex As Exception
                                 Console.WriteLine(vbNewLine)
                                 Console.WriteLine("------------Error general--------------")
                             End Try
-                            'menuAdministradores()
-                        Loop Until (number <> 3)
+                            menuAdministradores()
+                        Loop Until (number <> 4)
 
                     Case 4
-                        Console.WriteLine("Saliendo del Sistema!!!....")
+                        Console.WriteLine("Saliendo del Sistema....")
                         Exit Do
                 End Select
                 Exit Do
             Catch ex1 As FormatException
                 Console.WriteLine(vbNewLine)
                 Console.WriteLine("------------Error de formato------------")
-                'menuEmpleadores()
+
             Catch ex2 As OverflowException
                 Console.WriteLine(vbNewLine)
                 Console.WriteLine("-----------Error rango de datos------------")
-                'menuEmpleadores()
+
             Catch ex As Exception
                 Console.WriteLine(vbNewLine)
                 Console.WriteLine("------------Error general--------------")
@@ -313,10 +356,10 @@ Module Module1
         Dim opcion
         Do
             Console.WriteLine(vbCrLf & vbTab & vbTab & "MENU VENDEDORES:" & vbCrLf)
-            Console.WriteLine("1. INGRESAR FACTURA_________________________________[]")
-            Console.WriteLine("2. LISTAR PRODUCTOS___________________________________[]")
-            Console.WriteLine("3. BUSQUEDA POR PRODUCTOS____________________[]")
-            Console.WriteLine("4. SALIR DEL SISTEMA________________________________[]")
+            Console.WriteLine("1. INGRESAR FACTURA")
+            Console.WriteLine("2. LISTAR PRODUCTOS")
+            Console.WriteLine("3. BUSQUEDA POR PRODUCTOS")
+            Console.WriteLine("4. SALIR DEL SISTEMA")
             Console.Write(vbCrLf & "DIGITE OPCION DEL MENU:" & vbTab)
             opcion = Console.ReadLine()
             Try
@@ -339,7 +382,7 @@ Module Module1
                         Exit Do
                     Case 3
                         Console.Clear()
-                        'subMenuVendedores()
+                        'busquedaPorProducto()
                         Exit Do
                     Case 4
                         Console.WriteLine(vbCrLf & "SALIENDO DEL SISTEMA......")
