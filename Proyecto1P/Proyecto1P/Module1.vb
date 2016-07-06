@@ -57,10 +57,8 @@ Module Module1
         Dim id As String = ""
         Dim clave As String
         Dim usuario As String
-        'Dim id As String
         Dim administrador As Administrador
         Dim vendedor As Vendedor
-
 
         Dim cont As Integer = 0
 
@@ -117,11 +115,11 @@ Module Module1
             End If
         Next
 
-        For Each asis As Vendedor In vendedores
-            If asis.clave = clave And asis.usuario = usuario Then
+        For Each vendedor As Vendedor In vendedores
+            If vendedor.clave = clave And vendedor.usuario = usuario Then
                 acceso = True
-                usuarioEnUso = asis.usuario
-                claveEnUso = asis.clave
+                usuarioEnUso = vendedor.usuario
+                claveEnUso = vendedor.clave
                 Console.Clear()
                 menuVendedores()
                 Exit For
@@ -138,7 +136,6 @@ Module Module1
     Private Sub menuAdministradores()
         Console.Clear()
         Dim number = 0
-        'Dim number2 = 0
         Dim opcion
 
 
