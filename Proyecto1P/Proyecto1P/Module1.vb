@@ -24,8 +24,62 @@ Module Module1
         iniciarSesion()
         cargarCategoria()
         cargarProvincias()
+        nuevoUsuario()
 
         Console.ReadLine()
+
+
+    End Sub
+
+    Private Sub nuevoUsuario()
+        Dim idUsuario As String
+        Dim clave As String
+        Dim usuario As String
+        Dim nombre As String
+        Dim opUsuario
+        Dim numero
+
+        Dim administrador As Administrador
+        Dim vendedor As Vendedor
+
+        Console.WriteLine("")
+        Console.WriteLine(vbTab & vbTab & "INGRESO NUEVO USUARIO")
+        Console.WriteLine("INGRESE NOMBRE: ")
+        nombre = Console.ReadLine()
+        Console.WriteLine("TIPO USUARIO")
+        Console.WriteLine("1 ADMINISTRADOR")
+        Console.WriteLine("2 VENDEDOR")
+        Console.WriteLine("")
+        Console.Write(vbCrLf & "DIGITE OPCION DEL MENU:" & vbTab)
+        opUsuario = Console.ReadLine()
+
+        numero = Byte.Parse(opUsuario)
+            Dim nodoPrincipal As XmlNodeList = xmlDoc.GetElementsByTagName("usuarios")
+
+        For Each nodo As XmlNode In nodoPrincipal
+            For Each nodoUsuario As XmlNode In nodo.ChildNodes
+                For Each subNodoUsuario As XmlNode In nodoUsuario
+                    If numero = 1 Then
+                        Dim admin As XmlElement = xmlDoc.CreateElement("administrador")
+                        admin.SetAttribute("id", "103")
+                        admin.SetAttribute("clave", "2016")
+                        admin.SetAttribute("usuario", "admin")
+                        admin.SetAttribute("", nombre)
+
+
+
+                    End If
+                    If numero = 2 Then
+
+                    End If
+
+
+                Next
+            Next
+        Next
+
+
+
 
 
     End Sub
