@@ -2,7 +2,7 @@
 
 Module Module1
 
-    Dim path As String = "C:\Users\Galo\Desktop\ROSA\ESPOL 2016\Visual\"
+    Dim path As String = "C:\Users\Galo\Desktop\ROSA\ESPOL 2016\"
     Dim xmlDoc As New XmlDocument()
 
     Dim administradores As List(Of Administrador) = New List(Of Administrador)
@@ -16,7 +16,7 @@ Module Module1
 
     Sub Main()
 
-        Console.Title = "SISTEMA DE FACTURACION "
+        Console.Title = "SISTEMA DE FACTURACION 'COMERCIAL ESPOL'"
         Console.ForegroundColor = ConsoleColor.Yellow
         xmlDoc.Load(path + "sistemaFacturacion.xml")
 
@@ -459,7 +459,6 @@ Module Module1
     Private Sub agregarProducto()
         Console.Clear()
 
-        'Dim idProducto As String
         Dim nombreProducto As String
         Dim precioUnitario As String
         Dim categoriaId As String
@@ -491,11 +490,9 @@ Module Module1
         precioUnitario = Console.ReadLine()
         Console.WriteLine("")
 
-        ''listaProductos.Sort()
-        Dim idProductoEnd As Integer = listaProductos.Item(0).IdProducto
 
+        Dim idProductoEnd As Integer = listaProductos.Item(0).IdProducto
         Dim idProductoNuevo As Integer = CInt(idProductoEnd) + 1
-        ''Dim nuevoProducto As Producto = New Producto()
 
         Dim producto As Producto = New Producto(idProductoNuevo, nombreProducto, precioUnitario)
         guardarProducto(idCategoria, producto)
