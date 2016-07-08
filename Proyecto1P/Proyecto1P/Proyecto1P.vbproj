@@ -90,6 +90,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Producto.vb" />
+    <Compile Include="Provincia.vb" />
     <Compile Include="Usuario.vb" />
     <Compile Include="Vendedor.vb" />
   </ItemGroup>

@@ -41,4 +41,9 @@
         Me.listaProductos = New List(Of Producto)
     End Sub
 
+    Public Sub mostrarCategorias()
+        Console.Write("TITULO : " & Me.nombre)
+        Console.WriteLine()
+    End Sub
+
 End Class

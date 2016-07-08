@@ -9,6 +9,7 @@ Module Module1
     Dim vendedores As List(Of Vendedor) = New List(Of Vendedor)
     Dim listaCategorias As List(Of Categoria) = New List(Of Categoria)
     Dim listaProductos As List(Of Producto) = New List(Of Producto)
+    Dim listaProvincias As List(Of Provincia) = New List(Of Provincia)
 
     Dim usuarioEnUso As String
     Dim claveEnUso As String
@@ -22,6 +23,7 @@ Module Module1
         cargarUsuarios()
         iniciarSesion()
         cargarCategoria()
+        cargarProvincias()
 
         Console.ReadLine()
 
@@ -212,7 +214,7 @@ Module Module1
                                 Select Case number2
                                     Case 1
                                         Try
-                                            'agregarProducto()
+                                            agregarProducto()
                                             Console.WriteLine("EL PRODUCTO SE INGRESO CORRECTAMENTE")
                                             Console.ReadLine()
                                             menuAdministradores()
@@ -263,9 +265,8 @@ Module Module1
                             Console.WriteLine(vbTab & vbTab & "--- MENU IMPUESTOS --- ")
                             Console.WriteLine("")
                             Console.WriteLine("1. MODIFICAR IMPUESTO")
-                            Console.WriteLine("2. IVA POR TIPO DE PAGO")
-                            Console.WriteLine("3. IVA POR PROVINCIA")
-                            Console.WriteLine("4. SALIR DEL SISTEMA")
+                            Console.WriteLine("2. IVA POR PROVINCIA")
+                            Console.WriteLine("3. SALIR DEL SISTEMA")
                             Console.WriteLine("")
                             Console.Write(vbCrLf & "DIGITE OPCION DEL MENU:" & vbTab)
 
@@ -276,10 +277,8 @@ Module Module1
                                     Case 1
 
                                     Case 2
-
+                                        mostrarProvincias()
                                     Case 3
-
-                                    Case 4
                                         Console.WriteLine("Saliendo del Sistema....")
                                         Exit Do
                                 End Select
@@ -297,7 +296,7 @@ Module Module1
                                 Console.WriteLine("------------Error general--------------")
                             End Try
                             menuAdministradores()
-                        Loop Until (number <> 4)
+                        Loop Until (number <> 3)
 
                     Case 4
                         Console.WriteLine("Saliendo del Sistema....")
@@ -417,6 +416,126 @@ Module Module1
 
             Next
         Next
+    End Sub
+
+    Sub cargarProvincias()
+
+
+        Dim nodoPrincipal As XmlNodeList = xmlDoc.GetElementsByTagName("impuestos")
+
+        Dim nombreProvincia As String
+        Dim porcentajeIva As String
+
+        Dim provincia As Provincia
+
+
+        For Each nodo As XmlNode In nodoPrincipal
+            For Each nodoProvincias As XmlNode In nodo.ChildNodes
+
+                nombreProvincia = nodoProvincias.Attributes(0).Value
+                porcentajeIva = nodoProvincias.Attributes(1).Value
+                provincia = New Provincia(nombreProvincia, porcentajeIva)
+                listaProvincias.Add(provincia)
+
+            Next
+        Next
+    End Sub
+
+    Sub mostrarProvincias()
+
+        While listaProvincias.Count <= 24
+            Dim i As Byte = 1
+            For Each prov In listaProvincias
+                Console.Write(i & " ")
+                prov.mostrarProv()
+                i += 1
+            Next
+        End While
+
+
+    End Sub
+
+
+    Private Sub agregarProducto()
+        Console.Clear()
+
+        'Dim idProducto As String
+        Dim nombreProducto As String
+        Dim precioUnitario As String
+        Dim categoriaId As String
+        Dim categoria As String
+
+        Console.WriteLine("")
+        Console.Write("INGRESE NOMBRE:" & vbTab)
+        nombreProducto = Console.ReadLine()
+        Console.WriteLine("")
+        Do
+            Dim i As Byte = 1
+            For Each cat In listaCategorias
+                Console.Write(i & " ")
+                cat.mostrarCategorias()
+                i += 1
+            Next
+
+            Console.Write("ESCOJA LA CATEGORIA :" & vbTab)
+            categoriaId = Console.ReadLine()
+        Loop Until categoriaId >= 1 And categoriaId <= listaCategorias.Count
+        Console.Write("CATEGORIA:")
+        categoria = listaCategorias.Item(categoriaId - 1).nombre
+        Dim idCategoria As String
+        idCategoria = listaCategorias.Item(categoriaId - 1).id
+        'Console.WriteLine(categoria)
+        Console.WriteLine("")
+
+        Console.Write("INGRESE PRECIO:" & vbTab)
+        precioUnitario = Console.ReadLine()
+        Console.WriteLine("")
+
+        ''listaProductos.Sort()
+        Dim idProductoEnd As Integer = listaProductos.Item(0).IdProducto
+
+        Dim idProductoNuevo As Integer = CInt(idProductoEnd) + 1
+        ''Dim nuevoProducto As Producto = New Producto()
+
+        Dim producto As Producto = New Producto(idProductoNuevo, nombreProducto, precioUnitario)
+        guardarProducto(idCategoria, producto)
+
+    End Sub
+
+    Private Sub guardarProducto(categoriaId As String, producto As Producto)
+        For Each categoria As Categoria In listaCategorias
+            If categoria.id = categoriaId Then
+                categoria.listaProductos.Add(producto)
+            End If
+        Next
+        Dim xmldoc As New XmlDocument
+        xmldoc.Load(path + "sistemaFacturacion.xml")
+        Dim nodoPrincipal As XmlNodeList = xmldoc.GetElementsByTagName("categoria")
+
+
+        Try
+            For Each nodo As XmlNode In nodoPrincipal
+                Console.WriteLine(nodo.Name)
+                If nodo.Attributes(0).Value = categoriaId Then
+                    Dim nuevoProducto As XmlElement = xmldoc.CreateElement("producto")
+                    nuevoProducto.SetAttribute("id", producto.IdProducto)
+                    nuevoProducto.SetAttribute("nombre", producto.Nombre)
+                    nuevoProducto.SetAttribute("precioUnitario", producto.PrecioUnitario)
+
+                    nodo.AppendChild(nuevoProducto)
+
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+
+        Dim xmlFile As XmlTextWriter = New XmlTextWriter(path + "sistemaFacturacion.xml", Nothing)
+        xmlFile.Formatting = Formatting.Indented
+        xmldoc.WriteContentTo(xmlFile)
+        xmlFile.Close()
+
     End Sub
 
     Private Sub ingresarFactura()
