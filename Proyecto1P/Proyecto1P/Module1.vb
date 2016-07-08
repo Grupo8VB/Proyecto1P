@@ -2,7 +2,7 @@
 
 Module Module1
 
-    Dim path As String = "C:\Users\Galo\Desktop\ROSA\ESPOL 2016\Visual\"
+    Dim path As String = "C:\Users\Alvaro\Documents\Visual Studio 2015\Projects\Proyecto1P\"
     Dim xmlDoc As New XmlDocument()
 
     Dim administradores As List(Of Administrador) = New List(Of Administrador)
@@ -364,7 +364,7 @@ Module Module1
                 Select Case number
                     Case 1
                         Try
-                            'ingresarFactura()
+                            ingresarFactura()
                             Console.WriteLine("LA FACTURA SE INGRESO CORRECTAMENTE")
                             Console.ReadLine()
                             menuVendedores()
@@ -405,5 +405,117 @@ Module Module1
 
     End Sub
 
+    Private Sub ingresarFactura()
+        Dim Generator As System.Random = New System.Random()
 
+        Dim factu As XmlElement = xmlDoc.CreateElement("facturas")
+        factu.SetAttribute("title", "Nueva factura" & Generator.Next(1, 100))
+        Dim fecha As XmlElement = xmlDoc.CreateElement("fechaEmision")
+        Console.Write("Fecha Emision :" & vbTab)
+        fecha.InnerText = Console.ReadLine()
+        factu.AppendChild(fecha)
+        Dim numFactura As XmlElement = xmlDoc.CreateElement("factura numFactura")
+        Console.Write("Numero Factura :" & vbTab)
+        numFactura.InnerText = Console.ReadLine()
+        factu.AppendChild(numFactura)
+        Dim datosEmpr As XmlElement = xmlDoc.CreateElement("datosEmpresa razonSocial")
+        Console.Write("Razon social :" & vbTab)
+        numFactura.InnerText = Console.ReadLine()
+        factu.AppendChild(datosEmpr)
+        Dim ruc As XmlElement = xmlDoc.CreateElement("ruc")
+        Console.Write("RUC :" & vbTab)
+        ruc.InnerText = Console.ReadLine()
+        factu.AppendChild(ruc)
+        Dim datoClienteid As XmlElement = xmlDoc.CreateElement("datosCliente id")
+        Console.Write("Id Cliente :" & vbTab)
+        datoClienteid.InnerText = Console.ReadLine()
+        factu.AppendChild(datoClienteid)
+        Dim nombreCliente As XmlElement = xmlDoc.CreateElement("nombre")
+        Console.Write("Nombre Cliente :" & vbTab)
+        nombreCliente.InnerText = Console.ReadLine()
+        factu.AppendChild(nombreCliente)
+        Dim provinciaCliente As XmlElement = xmlDoc.CreateElement("provincia")
+        Console.Write("Provincia :" & vbTab)
+        provinciaCliente.InnerText = Console.ReadLine()
+        factu.AppendChild(provinciaCliente)
+        Dim direccionCliente As XmlElement = xmlDoc.CreateElement("direccion")
+        Console.Write("Direcccion :" & vbTab)
+        direccionCliente.InnerText = Console.ReadLine()
+        factu.AppendChild(direccionCliente)
+        Dim idProducto As XmlElement = xmlDoc.CreateElement("idProducto")
+        Console.Write("Id Producto :" & vbTab)
+        idProducto.InnerText = Console.ReadLine()
+        factu.AppendChild(idProducto)
+        Dim cantidad As XmlElement = xmlDoc.CreateElement("cantidad")
+        Console.Write("cantidad :" & vbTab)
+        cantidad.InnerText = Console.ReadLine()
+        factu.AppendChild(cantidad)
+        Dim nombreProd As XmlElement = xmlDoc.CreateElement("nombreProducto")
+        Console.Write("Nombre producto :" & vbTab)
+        nombreProd.InnerText = Console.ReadLine()
+        factu.AppendChild(nombreProd)
+        Dim precioUni As XmlElement = xmlDoc.CreateElement("precioUnitario")
+        Console.Write("Precio Unitario :" & vbTab)
+        precioUni.InnerText = Console.ReadLine()
+        factu.AppendChild(precioUni)
+        Dim precioTot As XmlElement = xmlDoc.CreateElement("precioTotal")
+        Console.Write("Precio total :" & vbTab)
+        precioTot.InnerText = Console.ReadLine()
+        factu.AppendChild(precioTot)
+        Dim subtotal As XmlElement = xmlDoc.CreateElement("subtotal")
+        Console.Write("Subtotal :" & vbTab)
+        subtotal.InnerText = Console.ReadLine()
+        factu.AppendChild(subtotal)
+        If provinciaCliente.InnerText = Console.ReadLine = "Manabi" Or "Esmeraldas" Then
+            Dim porcentajeiva As XmlElement = xmlDoc.CreateElement("porcentaIva")
+            porcentajeiva.InnerText = 1.12
+            porcentajeiva.InnerText = Console.ReadLine()
+            factu.AppendChild(porcentajeiva)
+            Dim importeiva As XmlElement = xmlDoc.CreateElement("precioUnitario")
+            importeiva.InnerText = porcentajeiva.InnerText * subtotal.InnerText = Console.ReadLine()
+            importeiva.InnerText = Console.ReadLine()
+            factu.AppendChild(importeiva)
+        Else
+            Dim porcentajeiva As XmlElement = xmlDoc.CreateElement("porcentaIva")
+            porcentajeiva.InnerText = 1.14
+            porcentajeiva.InnerText = Console.ReadLine()
+            factu.AppendChild(porcentajeiva)
+            Dim importeiva As XmlElement = xmlDoc.CreateElement("precioUnitario")
+            importeiva.InnerText = porcentajeiva.InnerText * subtotal.InnerText = Console.ReadLine()
+            importeiva.InnerText = Console.ReadLine()
+            factu.AppendChild(importeiva)
+        End If
+
+        Dim tipoPago As XmlElement = xmlDoc.CreateElement("tipoPago")
+        Console.Write("Tipo de pago :" & vbTab)
+        tipoPago.InnerText = Console.ReadLine()
+        factu.AppendChild(tipoPago)
+
+
+
+
+
+        'Console.Write("USUARIO :" & vbTab)
+        'Usuario = Console.ReadLine()
+
+        'Dim formato As XmlElement = xmlDoc.CreateElement("format")
+        'formato.InnerText = "Bluray"
+        'peli.AppendChild(formato)
+
+        'Dim rating As XmlElement = xmlDoc.CreateElement("rating")
+        'rating.InnerText = "PG"
+        'peli.AppendChild(rating)
+
+        'Dim stars As XmlElement = xmlDoc.CreateElement("stars")
+        'stars.InnerText = "4"
+        'peli.AppendChild(stars)
+
+        'Dim description As XmlElement = xmlDoc.CreateElement("description")
+        'description.InnerText = "Hola mundo"
+        'peli.AppendChild(description)
+
+
+        Return
+
+    End Sub
 End Module

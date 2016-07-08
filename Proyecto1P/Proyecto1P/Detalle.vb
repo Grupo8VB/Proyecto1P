@@ -140,21 +140,23 @@ Public Class Detalle
 
 
 
-    'Public Sub New(ciudad As String, provincia As String, descripcion As Integer, cantidad As Integer, precioUnitario As Double, precioTotal As Double, subtotal As Double, descuento As Double, iva As Double, tipoPago As String)
+    Public Sub New(idProducto As String, cantidad As Integer, nombreProducto As String, valorUnitario As Integer, valorTotal As Double, subTotal As Double, porcentajeIva As Double, importeIva As Double, importeTotal As Double, tipoPago As String, porcentajeDevolucion As Integer, importeDevolucion As Integer, precioTotal As Double)
 
-    '    Me._ciudad = ciudad
-    '    Me._provincia = provincia
-    '    Me._descripcion = descripcion
-    '    Me._cantidad = cantidad
-    '    Me._precioUnitario = precioUnitario
-    '    Me._precioTotal = precioTotal
-    '    Me._subTotal = subtotal
-    '    Me._descuento = descuento
-    '    Me._Iva = iva
-    '    Me._tipoDePago = tipoPago
-    '    'arreglo productos
+        Me._idProducto = idProducto
+        Me._cantidad = cantidad
+        Me._nombreProducto = nombreProducto
+        Me._valorUnitario = valorUnitario
+        Me._valorTotal = _valorTotal
+        Me._subTotal = subTotal
+        Me._porcentajeIva = porcentajeIva
+        Me._importeIva = _importeIva
+        Me._importeTotal = importeTotal
+        Me._tipoDePago = tipoPago
+        Me._porcentajeDevolucion = _porcentajeDevolucion
+        Me._importeDevolucion = _importeDevolucion
+        'arreglo productos
 
-    'End Sub
+    End Sub
 
 
 End Class

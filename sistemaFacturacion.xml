@@ -1,0 +1,43 @@
+﻿<?xml version= '1.0' encoding= 'utf-8'?>
+<sistema>
+  <usuarios>
+    <administradores>
+      <administrador id="101" usuario="admin" clave="2016">Rosa</administrador>
+      <administrador id="102" usuario="admin" clave="2016">Alvaro</administrador>
+    </administradores>
+    <vendedores>
+      <vendedor id="104" usuario="vend1" clave="2016">Carlos</vendedor>
+      <vendedor id="105" usuario="vend2" clave="2016">Luisa</vendedor>
+    </vendedores>
+  </usuarios>
+  <categorias>
+    <categoria id="20" nombre="Electrodomesticos">
+      <producto id="201" nombre="Lavadora LG" precioUnitario="600.00"></producto>
+      <producto id="202" nombre="Televisor Samsumg 42" precioUnitario="800.00"></producto>
+    </categoria>
+    <categoria id="30" nombre="Computadoras">
+      <producto id="301" nombre="Laptop Lenovo" precioUnitario="900.00"></producto>
+      <producto id="302" nombre="Laptop Samsung" precioUnitario="800.00"></producto>
+    </categoria>
+  </categorias>
+  <facturas>
+    <factura numFactura="100001" fechaEmision="30/06/2016">
+      <datosEmpresa ruc="0922009974001" razonSocial="Comercial Espol"></datosEmpresa>
+      <datosCliente id="0924567810" nombre="Javier Rodriguez" direccion="Sauces 8" provincia="Guayas"></datosCliente>
+      <detalleFactura> 
+        <idProducto>201</idProducto> 
+        <cantidad>1</cantidad> 
+        <nombreProducto>Lavadora LG</nombreProducto> 
+        <precioUnitario>600.00</precioUnitario> 
+        <precioTotal>600.00</precioTotal>
+        <subtotal>600.00</subtotal>
+        <porcentajeIva>14</porcentajeIva>
+        <importeIva>84.00</importeIva>
+        <importeTotal>684.00</importeTotal>
+        <tipoPago>Tarjeta de Credito</tipoPago>
+        <porcentajeDevolucion>1</porcentajeDevolucion>
+        <importeDevolucion>6.00</importeDevolucion>
+      </detalleFactura>
+    </factura>
+  </facturas>
+</sistema>
