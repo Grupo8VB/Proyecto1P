@@ -2,11 +2,13 @@
 
 Module Module1
 
-    Dim path As String = "C:\Users\Alvaro\Documents\Visual Studio 2015\Projects\Proyecto1P\"
+    Dim path As String = "C:\Users\Galo\Desktop\ROSA\ESPOL 2016\Visual\"
     Dim xmlDoc As New XmlDocument()
 
     Dim administradores As List(Of Administrador) = New List(Of Administrador)
     Dim vendedores As List(Of Vendedor) = New List(Of Vendedor)
+    Dim listaCategorias As List(Of Categoria) = New List(Of Categoria)
+    Dim listaProductos As List(Of Producto) = New List(Of Producto)
 
     Dim usuarioEnUso As String
     Dim claveEnUso As String
@@ -19,36 +21,10 @@ Module Module1
 
         cargarUsuarios()
         iniciarSesion()
+        cargarCategoria()
 
         Console.ReadLine()
 
-        ''xmlDoc.Load(pathW)
-        ''Dim raiz As XmlNodeList = xmlDoc.GetElementsByTagName("collection")
-        ''For Each nodo As XmlNode In raiz
-        '    Console.WriteLine("Nodo: " & nodo.Name & " attr:" & nodo.Attributes(0).Value)
-        '    For Each pelicula As XmlNode In nodo.ChildNodes
-        '        Console.WriteLine("Nodo: " & pelicula.Name & " attr:" & pelicula.Attributes(0).Value)
-        'dim p as Pelicula = new Pelicula(....)
-        'çoleccion.peliculas.add(p)
-        'Dim rented As XmlElement = xmlDoc.CreateElement("rented")
-        'rented.InnerText = "unkown"
-        'pelicula.AppendChild(rented)
-
-        'generacion del numero
-        'Next
-
-        ''nodo.AppendChild(CrearCategoria(xmlDoc))
-
-        ''Next
-
-        'Escribir en un archivo distinto
-        ''xmlDoc.Save(pathW)
-        'Dim xmlFile As XmlTextWriter = New XmlTextWriter(pathW, Nothing)
-        'xmlFile.Formatting = Formatting.Indented
-        'xmlDoc.WriteContentTo(xmlFile)
-        'xmlFile.Close()
-
-        ''Console.ReadLine()
 
     End Sub
 
@@ -403,6 +379,44 @@ Module Module1
             menuVendedores()
         Loop Until (number <> 4)
 
+    End Sub
+
+    Sub cargarCategoria()
+
+
+        Dim nodoPrincipal As XmlNodeList = xmlDoc.GetElementsByTagName("categorias")
+
+        Dim idCategoria As String
+        Dim nombreCategoria As String
+
+        Dim idProducto As String
+        Dim nombreProducto As String
+        Dim precioUnitario As String
+
+        Dim categoria As Categoria
+        Dim producto As Producto
+
+
+        For Each nodo As XmlNode In nodoPrincipal
+            For Each nodoCategorias As XmlNode In nodo.ChildNodes
+
+                idCategoria = nodoCategorias.Attributes(0).Value
+                nombreCategoria = nodoCategorias.Attributes(1).Value
+                categoria = New Categoria(idCategoria, nombreCategoria)
+
+                For Each nodoProducto As XmlNode In nodoCategorias.ChildNodes
+                    idProducto = nodoProducto.Attributes(0).Value
+                    nombreProducto = nodoProducto.Attributes(1).Value
+                    precioUnitario = nodoProducto.Attributes(2).Value
+
+                    producto = New Producto(idProducto, nombreProducto, precioUnitario)
+                    categoria.listaProductos.Add(producto)
+                    listaProductos.Add(producto)
+                Next
+                listaCategorias.Add(categoria)
+
+            Next
+        Next
     End Sub
 
     Private Sub ingresarFactura()

@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administrador.vb" />
+    <Compile Include="Categoria.vb" />
     <Compile Include="Cliente.vb" />
     <Compile Include="Detalle.vb" />
     <Compile Include="Factura.vb" />
@@ -88,6 +89,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Producto.vb" />
     <Compile Include="Usuario.vb" />
     <Compile Include="Vendedor.vb" />
   </ItemGroup>
