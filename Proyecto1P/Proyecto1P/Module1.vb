@@ -2,7 +2,7 @@
 
 Module Module1
 
-    Dim path As String = "C:\Users\Galo\Desktop\ROSA\ESPOL 2016\"
+    Dim path As String = "C:\Users\ESTUDIANTE\Documents\Visual Studio 2015\Projects\ProyectoP1\"
     Dim xmlDoc As New XmlDocument()
 
     Dim administradores As List(Of Administrador) = New List(Of Administrador)
@@ -203,8 +203,9 @@ Module Module1
                             Console.WriteLine(vbTab & vbTab & "--- MENU PRODUCTOS --- ")
                             Console.WriteLine("")
                             Console.WriteLine("1. INGRESAR NUEVO PRODUCTO")
-                            Console.WriteLine("2. MODIFICAR UN PRODUCTO")
-                            Console.WriteLine("3. SALIR DEL SISTEMA")
+                            Console.WriteLine("2. VERIFICAR PRODUCTO PAGA IVA")
+                            Console.WriteLine("3. MODIFICAR UN PRODUCTO")
+                            Console.WriteLine("4. SALIR DEL SISTEMA")
                             Console.WriteLine("")
                             Console.Write(vbCrLf & "DIGITE OPCION DEL MENU:" & vbTab)
 
@@ -223,8 +224,19 @@ Module Module1
                                             Console.ReadLine()
                                             menuAdministradores()
                                         End Try
-
                                     Case 2
+                                        Try
+                                            agregarProducto()
+                                            Console.WriteLine("EL PRODUCTO CON IVA POR DEFECTO SE INGRESO CORRECTAMENTE")
+                                            Console.ReadLine()
+                                            menuAdministradores()
+                                        Catch ex As Exception
+                                            Console.WriteLine("EL PRODUCTO NO SE INGRESO CORRECTAMENTE")
+                                            Console.ReadLine()
+                                            menuAdministradores()
+                                        End Try
+
+                                    Case 3
                                         Try
                                             'modificarProducto()
                                             Console.WriteLine("EL PRODUCTO SE MODIFICÓ CORRECTAMENTE")
@@ -236,7 +248,7 @@ Module Module1
                                             menuAdministradores()
                                         End Try
 
-                                    Case 3
+                                    Case 4
                                         Console.WriteLine("Saliendo del Sistema....")
                                         Exit Do
                                 End Select
@@ -254,7 +266,7 @@ Module Module1
                                 Console.WriteLine("------------Error general--------------")
                             End Try
                             menuAdministradores()
-                        Loop Until (number <> 3)
+                        Loop Until (number <> 4)
 
                     Case 3
                         Console.Clear()
@@ -339,7 +351,8 @@ Module Module1
                 Select Case number
                     Case 1
                         Try
-                            ingresarFactura()
+                            ingresarFactura(xmlDoc)
+                            'nodo.AppendChild(CrearPelicula(xmlDoc))
                             Console.WriteLine("LA FACTURA SE INGRESO CORRECTAMENTE")
                             Console.ReadLine()
                             menuVendedores()
@@ -535,7 +548,7 @@ Module Module1
 
     End Sub
 
-    Private Sub ingresarFactura()
+    Private Sub ingresarFactura(xmlDoc As XmlDocument)
         Dim Generator As System.Random = New System.Random()
 
         Dim factu As XmlElement = xmlDoc.CreateElement("facturas")
@@ -544,11 +557,11 @@ Module Module1
         Console.Write("Fecha Emision :" & vbTab)
         fecha.InnerText = Console.ReadLine()
         factu.AppendChild(fecha)
-        Dim numFactura As XmlElement = xmlDoc.CreateElement("factura numFactura")
+        Dim numFactura As XmlElement = xmlDoc.CreateElement("numFactura")
         Console.Write("Numero Factura :" & vbTab)
         numFactura.InnerText = Console.ReadLine()
         factu.AppendChild(numFactura)
-        Dim datosEmpr As XmlElement = xmlDoc.CreateElement("datosEmpresa razonSocial")
+        Dim datosEmpr As XmlElement = xmlDoc.CreateElement("razonSocial")
         Console.Write("Razon social :" & vbTab)
         numFactura.InnerText = Console.ReadLine()
         factu.AppendChild(datosEmpr)
@@ -556,7 +569,7 @@ Module Module1
         Console.Write("RUC :" & vbTab)
         ruc.InnerText = Console.ReadLine()
         factu.AppendChild(ruc)
-        Dim datoClienteid As XmlElement = xmlDoc.CreateElement("datosCliente id")
+        Dim datoClienteid As XmlElement = xmlDoc.CreateElement("id")
         Console.Write("Id Cliente :" & vbTab)
         datoClienteid.InnerText = Console.ReadLine()
         factu.AppendChild(datoClienteid)
@@ -588,13 +601,9 @@ Module Module1
         Console.Write("Precio Unitario :" & vbTab)
         precioUni.InnerText = Console.ReadLine()
         factu.AppendChild(precioUni)
-        Dim precioTot As XmlElement = xmlDoc.CreateElement("precioTotal")
-        Console.Write("Precio total :" & vbTab)
-        precioTot.InnerText = Console.ReadLine()
-        factu.AppendChild(precioTot)
         Dim subtotal As XmlElement = xmlDoc.CreateElement("subtotal")
-        Console.Write("Subtotal :" & vbTab)
-        subtotal.InnerText = Console.ReadLine()
+        subtotal.InnerText = cantidad.InnerText = Console.ReadLine * precioUni.InnerText = Console.ReadLine
+        subtotal.InnerText = Console.ReadLine("subtotal :" & subtotal.InnerText)
         factu.AppendChild(subtotal)
         If provinciaCliente.InnerText = Console.ReadLine = "Manabi" Or "Esmeraldas" Then
             Dim porcentajeiva As XmlElement = xmlDoc.CreateElement("porcentaIva")
@@ -602,8 +611,8 @@ Module Module1
             porcentajeiva.InnerText = Console.ReadLine()
             factu.AppendChild(porcentajeiva)
             Dim importeiva As XmlElement = xmlDoc.CreateElement("importeIva")
-            importeiva.InnerText = porcentajeiva.InnerText * subtotal.InnerText = Console.ReadLine()
-            importeiva.InnerText = Console.ReadLine()
+            importeiva.InnerText = porcentajeiva.InnerText = Console.ReadLine * subtotal.InnerText = Console.ReadLine
+            importeiva.InnerText = Console.ReadLine("Importe Iva :" & importeiva.InnerText)
             factu.AppendChild(importeiva)
         Else
             Dim porcentajeiva As XmlElement = xmlDoc.CreateElement("porcentaIva")
@@ -611,15 +620,23 @@ Module Module1
             porcentajeiva.InnerText = Console.ReadLine()
             factu.AppendChild(porcentajeiva)
             Dim importeiva As XmlElement = xmlDoc.CreateElement("importeIva")
-            importeiva.InnerText = porcentajeiva.InnerText * subtotal.InnerText = Console.ReadLine()
-            importeiva.InnerText = Console.ReadLine()
+            importeiva.InnerText = porcentajeiva.InnerText = Console.ReadLine * subtotal.InnerText = Console.ReadLine
+            importeiva.InnerText = Console.ReadLine("Importe Iva :" & importeiva.InnerText)
             factu.AppendChild(importeiva)
         End If
+        Dim precioTot As XmlElement = xmlDoc.CreateElement("precioTotal")
+        Console.Write("Precio total :" & vbTab)
+        precioTot.InnerText = Console.ReadLine()
+        factu.AppendChild(precioTot)
 
         Dim tipoPago As XmlElement = xmlDoc.CreateElement("tipoPago")
         Console.Write("Tipo de pago :" & vbTab)
         tipoPago.InnerText = Console.ReadLine()
         factu.AppendChild(tipoPago)
+
+
+
+
 
         Return
 
