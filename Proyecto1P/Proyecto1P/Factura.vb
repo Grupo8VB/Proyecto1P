@@ -35,6 +35,17 @@
             _ruc = value
         End Set
     End Property
+
+    Public Sub New(numFactura As Integer, fechaEmision As String, razonSocial As String, ruc As String)
+
+        Me._numFactura = numFactura
+        Me._fechaEmision = fechaEmision
+        Me._razonSocial = razonSocial
+        Me._ruc = ruc
+        'arreglo productos
+
+    End Sub
+
     'constructor se le asigna "Comercial Espol" y Ruc xml
 End Class
 

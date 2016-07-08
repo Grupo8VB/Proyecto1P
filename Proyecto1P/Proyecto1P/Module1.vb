@@ -601,7 +601,7 @@ Module Module1
             porcentajeiva.InnerText = 1.12
             porcentajeiva.InnerText = Console.ReadLine()
             factu.AppendChild(porcentajeiva)
-            Dim importeiva As XmlElement = xmlDoc.CreateElement("precioUnitario")
+            Dim importeiva As XmlElement = xmlDoc.CreateElement("importeIva")
             importeiva.InnerText = porcentajeiva.InnerText * subtotal.InnerText = Console.ReadLine()
             importeiva.InnerText = Console.ReadLine()
             factu.AppendChild(importeiva)
@@ -610,7 +610,7 @@ Module Module1
             porcentajeiva.InnerText = 1.14
             porcentajeiva.InnerText = Console.ReadLine()
             factu.AppendChild(porcentajeiva)
-            Dim importeiva As XmlElement = xmlDoc.CreateElement("precioUnitario")
+            Dim importeiva As XmlElement = xmlDoc.CreateElement("importeIva")
             importeiva.InnerText = porcentajeiva.InnerText * subtotal.InnerText = Console.ReadLine()
             importeiva.InnerText = Console.ReadLine()
             factu.AppendChild(importeiva)
@@ -620,30 +620,6 @@ Module Module1
         Console.Write("Tipo de pago :" & vbTab)
         tipoPago.InnerText = Console.ReadLine()
         factu.AppendChild(tipoPago)
-
-
-
-
-
-        'Console.Write("USUARIO :" & vbTab)
-        'Usuario = Console.ReadLine()
-
-        'Dim formato As XmlElement = xmlDoc.CreateElement("format")
-        'formato.InnerText = "Bluray"
-        'peli.AppendChild(formato)
-
-        'Dim rating As XmlElement = xmlDoc.CreateElement("rating")
-        'rating.InnerText = "PG"
-        'peli.AppendChild(rating)
-
-        'Dim stars As XmlElement = xmlDoc.CreateElement("stars")
-        'stars.InnerText = "4"
-        'peli.AppendChild(stars)
-
-        'Dim description As XmlElement = xmlDoc.CreateElement("description")
-        'description.InnerText = "Hola mundo"
-        'peli.AppendChild(description)
-
 
         Return
 
